@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.simplebooks</groupId>
-    <artifactId>integration-appdirect</artifactId>
+    <artifactId>appdirect-distribution</artifactId>
     <version>1.0.0</version>
 
     <parent>
@@ -25,6 +25,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>oauth.signpost</groupId>
+          <artifactId>signpost-commonshttp4</artifactId>
+          <version>1.2.1.2</version>
         </dependency>
     </dependencies>
 

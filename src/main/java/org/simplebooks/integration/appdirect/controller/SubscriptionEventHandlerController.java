@@ -11,10 +11,18 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.basic.DefaultOAuthConsumer;
+import oauth.signpost.exception.OAuthMessageSignerException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthCommunicationException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @RestController
 public class SubscriptionEventHandlerController {
@@ -31,9 +39,32 @@ public class SubscriptionEventHandlerController {
         System.out.println(eventUrl);
         System.out.println(authorization);
 
+        System.out.println(getEventInformation(eventUrl));
+
         return subscriptionService.create(null);
     }
+    private String getEventInformation(String eventUrl) {
+      String result = null;
+      try {
+        OAuthConsumer consumer = new DefaultOAuthConsumer("Dummy", "secret");
+        URL url = new URL(eventUrl);
+        HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        consumer.sign(request);
+        request.connect();
 
+        Object res = request.getContent();
+        result = res.toString();
+      } catch (IOException iox) {
+        result = "";
+      } catch (OAuthMessageSignerException oamsx ) {
+        result = "";
+      } catch (OAuthExpectationFailedException oefx) {
+        result = "";
+      } catch (OAuthCommunicationException ocex) {
+        result = "";
+      }
+      return result;
+    }
     /*
     @RequestMapping("/subscription/create/notification")
     public void echo(HttpServletRequest req,  HttpServletResponse res) throws IOException {
