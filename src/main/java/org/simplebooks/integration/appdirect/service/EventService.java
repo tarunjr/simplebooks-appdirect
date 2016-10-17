@@ -5,9 +5,9 @@ import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionChangeE
 import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionCancelEvent;
 import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionNoticeEvent;
 
-public interface SubscriptionService {
-  public EventResponseBase create(SubscriptionOrderEvent event);
-  public EventResponseBase change(SubscriptionChangeEvent event);
-  public EventResponseBase cancel(SubscriptionCancelEvent event);
-  public EventResponseBase notice(SubscriptionNoticeEvent event);
+public interface EventService {
+    public SubscriptionOrderEvent getOrderEvent(String eventUrl);
+    public SubscriptionChangeEvent getChangeEvent(String eventUrl);
+    public SubscriptionCancelEvent getCancelEvent(String eventUrl);
+    public SubscriptionNoticeEvent getNoticeEvent(String eventUrl);
 }

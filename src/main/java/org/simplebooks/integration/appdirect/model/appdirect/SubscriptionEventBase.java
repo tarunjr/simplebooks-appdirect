@@ -1,4 +1,4 @@
-package org.simplebooks.integration.appdirect.model;
+package org.simplebooks.integration.appdirect.model.appdirect;
 
 public class SubscriptionEventBase {
     //type property
@@ -18,14 +18,7 @@ public class SubscriptionEventBase {
     public void setMarketplace(Marketplace marketplace) {
       this.marketplace = marketplace;
     }
-    //Creator property
-    private Creator creator;
-    public  Creator getCreator(){
-      return creator;
-    }
-    public void setCreator(Creator creator) {
-      this.creator = creator;
-    }
+
 }
 /*
 {
