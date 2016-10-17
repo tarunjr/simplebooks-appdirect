@@ -102,6 +102,9 @@ public class AppdirectEventService  implements EventService {
         OAuthConsumer consumer = new DefaultOAuthConsumer(consumerKey, consumerSecret);
         URL url = new URL(eventUrl);
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        request.setRequestProperty("Accept", "application/json");
+        request.setRequestProperty("Accept-Language", "en");
+        request.setRequestProperty("Accept-Charset", "utf-8");
         consumer.sign(request);
         request.connect();
 
