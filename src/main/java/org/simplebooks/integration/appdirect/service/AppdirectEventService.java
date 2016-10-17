@@ -1,9 +1,8 @@
 package org.simplebooks.integration.appdirect.service;
 
 import org.simplebooks.integration.appdirect.service.EventService;
-import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionOrderEvent;
+import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionEvent;
 import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionChangeEvent;
-import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionCancelEvent;
 import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionNoticeEvent;
 
 import org.springframework.stereotype.Service;
@@ -33,13 +32,13 @@ public class AppdirectEventService  implements EventService {
     @Value("${consumersecret}")
     private String consumerSecret;
 
-    public SubscriptionOrderEvent getOrderEvent(String eventUrl) {
+    public SubscriptionEvent getOrderEvent(String eventUrl) {
         String eventJson = getEventJson(eventUrl);
 
         ObjectMapper mapper = new ObjectMapper();
-        SubscriptionOrderEvent result = null;
+        SubscriptionEvent result = null;
         try {
-          result = mapper.readValue(eventJson, SubscriptionOrderEvent.class);
+          result = mapper.readValue(eventJson, SubscriptionEvent.class);
           System.out.println(result.getPayload().getCompany().getUuid());
           System.out.println(result.getPayload().getOrder().getEditionCode());
         } catch(IOException iox) {
@@ -63,13 +62,13 @@ public class AppdirectEventService  implements EventService {
         }
         return result;
     }
-    public SubscriptionCancelEvent getCancelEvent(String eventUrl) {
+    public SubscriptionEvent getCancelEvent(String eventUrl) {
         String eventJson = getEventJson(eventUrl);
         System.out.println("getCancelEvent");
         ObjectMapper mapper = new ObjectMapper();
-        SubscriptionCancelEvent result = null;
+        SubscriptionEvent result = null;
         try {
-          result = mapper.readValue(eventJson, SubscriptionCancelEvent.class);
+          result = mapper.readValue(eventJson, SubscriptionEvent.class);
           System.out.println(result);
           System.out.println(result.getPayload().getAccount().getAccountIdentifier());
         } catch(IOException iox) {

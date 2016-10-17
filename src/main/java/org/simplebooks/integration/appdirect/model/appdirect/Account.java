@@ -24,4 +24,12 @@ public class Account {
     public void setStatus(String status) {
       this.status = status;
     }
+
+    private String parentAccountIdentifier;
+    public String getParentAccountIdentifier() {
+      return parentAccountIdentifier;
+    }
+    public void setParentAccountIdentifier(String parentAccountIdentifier) {
+      this.parentAccountIdentifier = parentAccountIdentifier;
+    }
 }
