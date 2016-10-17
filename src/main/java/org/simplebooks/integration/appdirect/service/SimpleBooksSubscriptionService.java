@@ -1,8 +1,6 @@
 package org.simplebooks.integration.appdirect.service;
 
 import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionEvent;
-import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionChangeEvent;
-import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionNoticeEvent;
 
 public class SimpleBooksSubscriptionService implements SubscriptionService {
   public EventResponseBase create(SubscriptionEvent event) {
@@ -11,7 +9,7 @@ public class SimpleBooksSubscriptionService implements SubscriptionService {
       res.setAccountIdentifier("SMP-" + event.getPayload().getOrder().getEditionCode() + "-" + "123456");
       return res;
   }
-  public EventResponseBase change(SubscriptionChangeEvent event) {
+  public EventResponseBase change(SubscriptionEvent event) {
     EventResponseBase res = new EventResponseBase();
     res.setSucccess(true);
     return res;
@@ -21,7 +19,7 @@ public class SimpleBooksSubscriptionService implements SubscriptionService {
     res.setSucccess(true);
     return res;
   }
-  public EventResponseBase notice(SubscriptionNoticeEvent event) {
+  public EventResponseBase notice(SubscriptionEvent event) {
     EventResponseBase res = new EventResponseBase();
     res.setSucccess(true);
     return res;

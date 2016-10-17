@@ -3,6 +3,7 @@ package org.simplebooks.integration.appdirect.model.appdirect;
 import org.simplebooks.integration.appdirect.model.appdirect.Account;
 import org.simplebooks.integration.appdirect.model.appdirect.Configuration;
 import org.simplebooks.integration.appdirect.model.appdirect.Order;
+import org.simplebooks.integration.appdirect.model.appdirect.Notice;
 
 public class Payload{
 
@@ -50,11 +51,11 @@ public class Payload{
   public void setOrder(Order order) {
     this.order = order;
   }
-  private String notice;
-  public String getNotice() {
+  private Notice notice;
+  public Notice getNotice() {
     return notice;
   }
-  public void setNotice(String notice) {
+  public void setNotice(Notice notice) {
     this.notice = notice;
   }
   private Configuration configuration;

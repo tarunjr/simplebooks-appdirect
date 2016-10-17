@@ -2,8 +2,6 @@ package org.simplebooks.integration.appdirect.service;
 
 import org.simplebooks.integration.appdirect.service.EventService;
 import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionEvent;
-import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionChangeEvent;
-import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionNoticeEvent;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,28 +30,13 @@ public class AppdirectEventService  implements EventService {
     @Value("${consumersecret}")
     private String consumerSecret;
 
-    public SubscriptionEvent getOrderEvent(String eventUrl) {
+    public SubscriptionEvent getEvent(String eventUrl) {
         String eventJson = getEventJson(eventUrl);
 
         ObjectMapper mapper = new ObjectMapper();
         SubscriptionEvent result = null;
         try {
           result = mapper.readValue(eventJson, SubscriptionEvent.class);
-          System.out.println(result.getPayload().getCompany().getUuid());
-          System.out.println(result.getPayload().getOrder().getEditionCode());
-        } catch(IOException iox) {
-          iox.printStackTrace();
-          result = null;
-        }
-        return result;
-    }
-    public SubscriptionChangeEvent getChangeEvent(String eventUrl) {
-        String eventJson = getEventJson(eventUrl);
-
-        ObjectMapper mapper = new ObjectMapper();
-        SubscriptionChangeEvent result = null;
-        try {
-          result = mapper.readValue(eventJson, SubscriptionChangeEvent.class);
           System.out.println(result.getPayload().getAccount().getAccountIdentifier());
           System.out.println(result.getPayload().getOrder().getEditionCode());
         } catch(IOException iox) {
@@ -62,38 +45,7 @@ public class AppdirectEventService  implements EventService {
         }
         return result;
     }
-    public SubscriptionEvent getCancelEvent(String eventUrl) {
-        String eventJson = getEventJson(eventUrl);
-        System.out.println("getCancelEvent");
-        ObjectMapper mapper = new ObjectMapper();
-        SubscriptionEvent result = null;
-        try {
-          result = mapper.readValue(eventJson, SubscriptionEvent.class);
-          System.out.println(result);
-          System.out.println(result.getPayload().getAccount().getAccountIdentifier());
-        } catch(IOException iox) {
-          iox.printStackTrace();
-          result = null;
-        }
-        return result;
-    }
-    public SubscriptionNoticeEvent getNoticeEvent(String eventUrl) {
-        String eventJson = getEventJson(eventUrl);
 
-        ObjectMapper mapper = new ObjectMapper();
-        SubscriptionNoticeEvent result = null;
-        try {
-          result = mapper.readValue(eventJson, SubscriptionNoticeEvent.class);
-          System.out.println(result.getPayload().getAccount().getAccountIdentifier());
-          System.out.println(result.getPayload().getNotice().getType());
-        } catch(IOException iox) {
-          iox.printStackTrace();
-          result = null;
-        }
-        return result;
-    }
-
-    // TODO : Check if we can use RestTemplate insted of HttpURLConnection
     private String getEventJson(String eventUrl) {
       StringBuilder result = new StringBuilder();
       try {

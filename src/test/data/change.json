@@ -1,40 +1,50 @@
 {
-    "type": "SUBSCRIPTION_CHANGE",
-    "marketplace": {
-      "baseUrl": "https://www.acme.com",
-      "partner": "APPDIRECT"
+  "type": "SUBSCRIPTION_CHANGE",
+  "marketplace": {
+    "partner": "APPDIRECT",
+    "baseUrl": "https:\/\/marketplace.appdirect.com"
+  },
+  "applicationUuid": null,
+  "flag": "DEVELOPMENT",
+  "creator": {
+    "uuid": "f8bcb15a-624b-49e7-af0c-86ac11f2dca4",
+    "openId": "https:\/\/marketplace.appdirect.com\/openid\/id\/f8bcb15a-624b-49e7-af0c-86ac11f2dca4",
+    "email": "tarunjr@gmail.com",
+    "firstName": "Tarun",
+    "lastName": "Rathor",
+    "language": "en",
+    "locale": "en-US",
+    "address": null,
+    "attributes": null
+  },
+  "payload": {
+    "user": null,
+    "company": null,
+    "account": {
+      "accountIdentifier": "SMP-RECURRING-123456",
+      "status": "ACTIVE",
+      "parentAccountIdentifier": null
     },
-    "creator": {
-      "address": {
-        "city": "San Jose",
-        "country": "US",
-        "firstName": "Test",
-        "fullName": "Test User",
-        "lastName": "User",
-        "state": "CA",
-        "street1": "1 Main St",
-        "zip": "95131"
-      },
-      "email": "testuser@testco.com",
-      "firstName": "Test",
-      "language": "en",
-      "lastName": "User",
-      "locale": "en_US",
-      "openId": "https://www.acme.com/openid/id/7f59aad1-85cd-4c04-b35b-906ee53acc71",
-      "uuid": "7f59aad1-85cd-4c04-b35b-906ee53acc71"
-    },
-    "payload": {
-      "account": {
-        "accountIdentifier": "206123",
-        "status": "ACTIVE"
-      },
-      "order": {
-        "editionCode": "DME",
-        "pricingDuration": "DAILY",
-        "item": {
-          "quantity": "0",
-          "unit": "GIGABYTE"
+    "addonInstance": null,
+    "addonBinding": null,
+    "order": {
+      "editionCode": "RECURRING",
+      "addonOfferingCode": null,
+      "pricingDuration": "MONTHLY",
+      "items": [
+        {
+          "unit": "USER",
+          "quantity": 2
         }
-      }
+      ]
+    },
+    "notice": null,
+    "configuration": {
+
     }
+  },
+  "returnUrl": null,
+  "links": [
+
+  ]
 }

@@ -38,7 +38,7 @@ public class SubscriptionNotificationController {
         isAuthorized(authorization);
 
         return new ResponseEntity<EventResponseBase>(
-                        subscriptionService.create(eventService.getOrderEvent(eventUrl)),
+                        subscriptionService.create(eventService.getEvent(eventUrl)),
                         HttpStatus.CREATED);
     }
 
@@ -48,7 +48,7 @@ public class SubscriptionNotificationController {
                                               @RequestHeader(value="authorization", defaultValue="") String authorization) {
       isAuthorized(authorization);
       return new ResponseEntity<EventResponseBase>(
-                            subscriptionService.change(eventService.getChangeEvent(eventUrl)),
+                            subscriptionService.change(eventService.getEvent(eventUrl)),
                             HttpStatus.OK);
 
     }
@@ -59,7 +59,7 @@ public class SubscriptionNotificationController {
                                               @RequestHeader(value="authorization", defaultValue="") String authorization) {
       isAuthorized(authorization);
       return new ResponseEntity<EventResponseBase>(
-                            subscriptionService.cancel(eventService.getCancelEvent(eventUrl)),
+                            subscriptionService.cancel(eventService.getEvent(eventUrl)),
                             HttpStatus.OK);
     }
 
@@ -69,7 +69,7 @@ public class SubscriptionNotificationController {
                                               @RequestHeader(value="authorization", defaultValue="") String authorization) {
       isAuthorized(authorization);
       return new ResponseEntity<EventResponseBase>(
-                            subscriptionService.notice(eventService.getNoticeEvent(eventUrl)),
+                            subscriptionService.notice(eventService.getEvent(eventUrl)),
                             HttpStatus.OK);
     }
     private void isAuthorized(String authorization) {
