@@ -37,8 +37,6 @@ public class AppdirectEventService  implements EventService {
         SubscriptionEvent result = null;
         try {
           result = mapper.readValue(eventJson, SubscriptionEvent.class);
-          System.out.println(result.getPayload().getAccount().getAccountIdentifier());
-          System.out.println(result.getPayload().getOrder().getEditionCode());
         } catch(IOException iox) {
           iox.printStackTrace();
           result = null;
@@ -65,7 +63,7 @@ public class AppdirectEventService  implements EventService {
         while((line = reader.readLine()) != null) {
           result.append(line);
         }
-        //System.out.println(result.toString());
+        System.out.println(result.toString());
       } catch (IOException iox) {
         result.append("IOException");
       } catch (OAuthMessageSignerException oamsx ) {
