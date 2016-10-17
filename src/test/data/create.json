@@ -1,38 +1,54 @@
 {
-    "type": "SUBSCRIPTION_ORDER",
-    "marketplace": {
-      "baseUrl": "https://www.acme.com",
-      "partner": "APPDIRECT"
+  "type": "SUBSCRIPTION_ORDER",
+  "marketplace": {
+    "partner": "APPDIRECT",
+    "baseUrl": "https:\/\/marketplace.appdirect.com"
+  },
+  "applicationUuid": null,
+  "flag": "DEVELOPMENT",
+  "creator": {
+    "uuid": "f8bcb15a-624b-49e7-af0c-86ac11f2dca4",
+    "openId": "https:\/\/marketplace.appdirect.com\/openid\/id\/f8bcb15a-624b-49e7-af0c-86ac11f2dca4",
+    "email": "tarunjr@gmail.com",
+    "firstName": "Tarun",
+    "lastName": "Rathor",
+    "language": "en",
+    "locale": "en-US",
+    "address": null,
+    "attributes": null
+  },
+  "payload": {
+    "user": null,
+    "company": {
+      "uuid": "10575f97-86c9-4607-910e-c63edd6664ba",
+      "externalId": null,
+      "name": "SimpleBooks",
+      "email": null,
+      "phoneNumber": null,
+      "website": "https:\/\/github.com\/tarunjr",
+      "country": "US"
     },
-    "creator": {
-      "address": {
-        "firstName": "Test",
-        "fullName": "Test User",
-        "lastName": "User"
-      },
-      "email": "testuser@testco.com",
-      "firstName": "Test",
-      "language": "en",
-      "lastName": " User",
-      "locale": "en_US",
-      "openId": "https://www.acme.com/openid/id/47cb8f55-1af6-5bfc-9a7d-8061d3aa0c97",
-      "uuid": "47cb8f55-1af6-5bfc-9a7d-8061d3aa0c97"
-    },
-    "payload": {
-      "company": {
-        "country": "US",
-        "name": "tester",
-        "phoneNumber": "1-800-333-3333",
-        "uuid": "385beb51-51ae-4ffe-8c05-3f35a9f99825",
-        "website": "www.testco.com"
-      },
-      "order": {
-        "editionCode": "Standard",
-        "pricingDuration": "MONTHLY",
-        "item": {
-          "quantity": "4",
-          "unit": "USER"
+    "account": null,
+    "addonInstance": null,
+    "addonBinding": null,
+    "order": {
+      "editionCode": "RECURRING",
+      "addonOfferingCode": null,
+      "pricingDuration": "MONTHLY",
+      "items": [
+        {
+          "unit": "USER",
+          "quantity": 5
         }
-      }
+      ]
+    },
+    "notice": null,
+    "configuration": {
+
     }
+  },
+  "returnUrl": null,
+  "links": [
+
+  ]
 }

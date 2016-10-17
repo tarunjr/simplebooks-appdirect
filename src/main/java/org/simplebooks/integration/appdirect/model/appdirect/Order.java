@@ -1,6 +1,7 @@
 package org.simplebooks.integration.appdirect.model.appdirect;
 
 import org.simplebooks.integration.appdirect.model.appdirect.Item;
+import java.util.List;
 /*
 "order": {
       "editionCode": "Standard",
@@ -28,11 +29,19 @@ public class Order {
       this.pricingDuration = pricingDuration;
     }
 
-    private Item item;
-    public Item getItem() {
-      return item;
+    private List<Item> items;
+    public List<Item> getItems() {
+      return items;
     }
-    public void setItem(Item item) {
-      this.item = item;
+    public void setItem(List<Item> items) {
+      this.items = items;
+    }
+
+    private String addonOfferingCode;
+    public String getAddonOfferingCode() {
+      return addonOfferingCode;
+    }
+    public void setAddonOfferingCode(String addonOfferingCode) {
+      this.addonOfferingCode = addonOfferingCode;
     }
 }

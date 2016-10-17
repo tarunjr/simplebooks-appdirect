@@ -50,4 +50,20 @@ public class Company {
     public void setWebsite(String website) {
       this.website = website;
     }
+
+    private String externalId;
+    public String getExternalId() {
+      return externalId;
+    }
+    public void setExternalId(String externalId) {
+      this.externalId = externalId;
+    }
+    private String email;
+    public String getEmail() {
+      return email;
+    }
+    public void setEmail(String email) {
+      this.email = email;
+    }
+
 }

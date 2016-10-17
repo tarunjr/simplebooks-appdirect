@@ -85,4 +85,12 @@ public class Creator {
     public void setUuid(String uuid) {
       this.uuid = uuid;
     }
+
+    private String attributes;
+    public String getAtributes() {
+      return attributes;
+    }
+    public void setAttributes(String attributes) {
+      this.attributes = attributes;
+    }
 }
