@@ -21,7 +21,7 @@
     "user": null,
     "company": null,
     "account": {
-      "accountIdentifier": "SMP-RECURRING-123456",
+      "accountIdentifier": "1",
       "status": "ACTIVE",
       "parentAccountIdentifier": null
     },

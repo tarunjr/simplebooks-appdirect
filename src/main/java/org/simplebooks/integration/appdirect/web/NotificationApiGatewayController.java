@@ -4,7 +4,10 @@ import org.simplebooks.integration.appdirect.service.SubscriptionService;
 import org.simplebooks.integration.appdirect.service.SecurityService;
 import org.simplebooks.integration.appdirect.service.EventResponseBase;
 import org.simplebooks.integration.appdirect.service.EventService;
+import org.simplebooks.integration.appdirect.Application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,14 +19,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
-public class SubscriptionNotificationController {
+public class NotificationApiGatewayController {
+    private static final Logger log = LoggerFactory.getLogger(NotificationApiGatewayController.class);
 
     private final SubscriptionService subscriptionService;
     private final EventService eventService;
     private final SecurityService securityService;
 
     @Autowired
-    public SubscriptionNotificationController(SubscriptionService subscriptionService,
+    public NotificationApiGatewayController(SubscriptionService subscriptionService,
                                               EventService eventService,
                                               SecurityService securityService) {
         this.subscriptionService = subscriptionService;;
@@ -35,6 +39,7 @@ public class SubscriptionNotificationController {
     public ResponseEntity<EventResponseBase> create(
                                               @RequestParam(value="url", defaultValue="")  String eventUrl,
                                               @RequestHeader(value="authorization",defaultValue="") String authorization) {
+        log.info("create:" + eventUrl);
         isAuthorized(authorization);
 
         return new ResponseEntity<EventResponseBase>(
@@ -46,6 +51,7 @@ public class SubscriptionNotificationController {
     public ResponseEntity<EventResponseBase> change(
                                               @RequestParam(value="url", defaultValue="")  String eventUrl,
                                               @RequestHeader(value="authorization", defaultValue="") String authorization) {
+      log.info("change:" + eventUrl);
       isAuthorized(authorization);
       return new ResponseEntity<EventResponseBase>(
                             subscriptionService.change(eventService.getEvent(eventUrl)),
@@ -57,6 +63,7 @@ public class SubscriptionNotificationController {
     public ResponseEntity<EventResponseBase> cancel(
                                               @RequestParam(value="url", defaultValue="")  String eventUrl,
                                               @RequestHeader(value="authorization", defaultValue="") String authorization) {
+      log.info("cancel:" + eventUrl);
       isAuthorized(authorization);
       return new ResponseEntity<EventResponseBase>(
                             subscriptionService.cancel(eventService.getEvent(eventUrl)),
@@ -67,6 +74,7 @@ public class SubscriptionNotificationController {
     public ResponseEntity<EventResponseBase> notice(
                                               @RequestParam(value="url", defaultValue="")  String eventUrl,
                                               @RequestHeader(value="authorization", defaultValue="") String authorization) {
+      log.info("notice:" + eventUrl);
       isAuthorized(authorization);
       return new ResponseEntity<EventResponseBase>(
                             subscriptionService.notice(eventService.getEvent(eventUrl)),

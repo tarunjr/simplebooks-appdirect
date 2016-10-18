@@ -2,9 +2,10 @@ package org.simplebooks.integration.appdirect.service;
 
 import org.simplebooks.integration.appdirect.service.EventService;
 import org.simplebooks.integration.appdirect.model.appdirect.SubscriptionEvent;
+import org.simplebooks.integration.appdirect.Application;
 
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.basic.DefaultOAuthConsumer;
@@ -13,6 +14,9 @@ import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthCommunicationException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -24,21 +28,22 @@ import java.lang.StringBuilder;
 
 
 public class AppdirectEventService  implements EventService {
+    private static final Logger log = LoggerFactory.getLogger(AppdirectEventService.class);
 
-    @Value("${consumerkey}")
-    private String consumerKey;
-    @Value("${consumersecret}")
-    private String consumerSecret;
-
+    private final SecurityService securityService;
+    @Autowired
+    public AppdirectEventService(SecurityService securityService) {
+        this.securityService = securityService;
+    }
     public SubscriptionEvent getEvent(String eventUrl) {
         String eventJson = getEventJson(eventUrl);
-
-        ObjectMapper mapper = new ObjectMapper();
         SubscriptionEvent result = null;
+
         try {
+          ObjectMapper mapper = new ObjectMapper();
           result = mapper.readValue(eventJson, SubscriptionEvent.class);
         } catch(IOException iox) {
-          iox.printStackTrace();
+          log.error("Failed to parse event json", iox);
           result = null;
         }
         return result;
@@ -47,14 +52,15 @@ public class AppdirectEventService  implements EventService {
     private String getEventJson(String eventUrl) {
       StringBuilder result = new StringBuilder();
       try {
-        System.out.println(consumerKey + ":" + consumerSecret);
-        OAuthConsumer consumer = new DefaultOAuthConsumer(consumerKey, consumerSecret);
-        URL url = new URL(eventUrl);
-        HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        log.info(eventUrl);
+        HttpURLConnection request= securityService.getSignedURLConnection(eventUrl);
+        if (request == null) {
+          result.append("{}");
+          return result.toString();
+        }
         request.setRequestProperty("Accept", "application/json");
         request.setRequestProperty("Accept-Language", "en");
         request.setRequestProperty("Accept-Charset", "utf-8");
-        consumer.sign(request);
         request.connect();
 
         InputStream in = (InputStream)request.getInputStream();
@@ -63,15 +69,10 @@ public class AppdirectEventService  implements EventService {
         while((line = reader.readLine()) != null) {
           result.append(line);
         }
-        System.out.println(result.toString());
+        log.info(result.toString());
       } catch (IOException iox) {
-        result.append("IOException");
-      } catch (OAuthMessageSignerException oamsx ) {
-        result.append("OAuthMessageSignerException");
-      } catch (OAuthExpectationFailedException oefx) {
-        result.append("OAuthExpectationFailedException");
-      } catch (OAuthCommunicationException ocex) {
-        result.append("OAuthCommunicationException");
+        log.error("Failed to get event json", iox);
+        result.append("{}");
       }
       return result.toString();
     }
