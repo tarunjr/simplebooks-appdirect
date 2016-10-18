@@ -84,9 +84,10 @@ public class SimpleBooksSubscriptionService implements SubscriptionService {
 
   private SubscriptionAccount convert(SubscriptionEvent event) {
       // Basic validation check
-      if (event.getPayload() == null &&
+      if ( event == null ||
+          (event.getPayload() == null &&
           event.getPayload().getAccount() == null &&
-          event.getPayload().getOrder() == null) {
+          event.getPayload().getOrder() == null)) {
           return null;
       }
 
